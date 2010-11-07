@@ -1,1 +1,66 @@
 # Streams + Strings = Streang
+
+## Abstract
+
+*Streang* is an attempt at an object-oriented, reflective, modern language. As computers get faster with more cores and memory, it is important that parallelization and concurrency be made as simple as possible. Additionally, most modern network applications spend the majority of their time waiting on and manipulating IO. A web framework gets an HTTP request, processes it, turns it into one or several database queries that run sequentially, builds a response document in memory, then sends it back out on the network. All of these operations could be done in parallel on a multi-core system, which is the purpose behind functional languages. However, functional languages are missing the equivalent of Ruby or Python, that is, a language that optimizes for developer time.
+
+## Managing IO
+
+Since IO is so fundamental to the performance and operation of every network server, it is absolutely imperative that the language support it at a very low level, and make it transparent to the developer. Some features in functional languages make this easier.
+
+
+
+## What I don't want
+
+ * `eval` of any kind
+ * This is a high-level server language, not a command-line utility language, like Perl and its descendants. I'd like to avoid things like environment variables and command like options, if it can at all be helped. JavaScript seems to be able to get away with it...
+ * No "protected" or "private" methods. In Ruby, its just a formality, because you can always #send the method. Instead, the public API should be exposed via documentation.
+
+## Syntax
+
+Syntax is mostly inspired by Ruby and Python, with some other sugar taken from Lua and JavaScript.
+
+### Trailing commas are legal
+
+    fruit = [
+      apple,
+      banana,
+      orange,
+    ]
+
+
+### Function overloading
+
+Simplify this common idiom:
+
+    def find(*args)
+      case args.shift
+      when :first
+        find_one(*args)
+      when :all
+        find_many(*args)
+      end
+    end
+
+    def find_one(*args)
+      # find one
+    end
+
+    def find_many(*args)
+      # find many
+    end
+
+With this:
+
+    def find(:first, *args)
+      # find one
+    end
+
+    def find(:all, *args)
+      # find all
+    end
+
+
+
+
+
