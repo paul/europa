@@ -61,6 +61,25 @@ With this:
     end
 
 
+### Sugar
 
+"keywords" like `class`, `module`, `def` are just sugar. The following are equivalent:
 
+    class MyClass
+
+      def foo(bar, baz)
+        # ...
+      end
+
+    end
+
+uses the sugar methods, but the actual language specification is:
+
+    MyClass = Object.clone do
+
+      foo = method(bar, baz) do
+        # ...
+      end
+
+    end
 
