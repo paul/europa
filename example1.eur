@@ -1,0 +1,44 @@
+
+# A comment is a # at the start of a line, to the end of the line
+
+# Integer
+42
+
+# Number
+3.1415
+
+# Single-quoted String
+'foo'
+
+# Double-quoted String
+"bar"
+
+# labels
+:label
+:"quoted label"
+:'another label'
+
+# variable
+foo
+foo_bar
+_bar
+Baz
+
+# method calls
+foo.bar
+foo.bar(42)
+
+# more complex syntax
+
+if(something,
+  do_when_true,
+  do_when_false
+)
+
+if(something)
+then(do_when_true)
+else(do_when_false)
+
+# suffix conditional
+do_stuff unless(dont_do_stuff)
+

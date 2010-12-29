@@ -1,0 +1,20 @@
+
+EXP        : { MESSAGE | TERMINATOR }
+
+MESSAGE    : SYMBOL [ARGUMENTS]
+
+ARGUMENTS  : "(" [EXP [ { "," EXP } ]] ")"
+
+SYMBOL     : IDENTIFIER | LITERAL
+
+IDENTIFER  : ( "_" | alphabetic_char ) [ any_char* ]
+
+LITERAL    : string | numeric
+
+TERMINATOR : "\n" | ";"
+
+alphabetic_char : [a-zA-Z]
+numeric_char    : [ "-" ] [0-9] [\.0-9]
+white_space     : [ \n\t]
+any_char        : !white_space
+

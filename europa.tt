@@ -1,0 +1,83 @@
+grammar Europa
+
+  rule script
+    statement+
+  end
+
+  rule statement
+    exp (whitespace+ exp)*
+  end
+
+  rule exp
+    (message ( "." message)*) / terminator / comment
+  end
+
+  rule message
+    symbol arguments*
+  end
+
+  rule symbol
+    identifier / literal
+  end
+
+  rule arguments
+    "(" whitespace* ( exp whitespace* ( "," whitespace* exp whitespace* )* )* whitespace* ")"
+  end
+
+  rule identifier
+    [a-zA-Z_] [\w]*
+  end
+
+  rule literal
+    string / number / label
+  end
+
+  rule string
+    single_quoted_string / double_quoted_string
+  end
+
+  rule single_quoted_string
+    '"' (!'"' . / '\"')* '"'
+  end
+
+  rule double_quoted_string
+    "'" (!"'" . )* "'"
+  end
+
+  rule number
+    integer ( "." integer )*
+  end
+
+  rule integer
+    [0-9]+ {
+      def value
+        text_value.to_i
+      end
+    }
+  end
+
+  rule label
+    ":" ([\w]+ / string)
+  end
+
+  rule terminator
+    space* (";" / newline)
+  end
+
+  rule comment
+    '#' ( !newline . )+ ( newline / !. )
+  end
+
+  rule newline
+    [\r\n]
+  end
+
+  rule space
+    [ \t]
+  end
+
+  rule whitespace
+    (space / newline)
+  end
+
+end

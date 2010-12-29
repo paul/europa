@@ -1,12 +1,37 @@
-# Streams + Strings = Streang
+# Europa
 
 ## Abstract
 
-*Streang* is an attempt at an object-oriented, reflective, modern language. As computers get faster with more cores and memory, it is important that parallelization and concurrency be made as simple as possible. Additionally, most modern network applications spend the majority of their time waiting on and manipulating IO. A web framework gets an HTTP request, processes it, turns it into one or several database queries that run sequentially, builds a response document in memory, then sends it back out on the network. All of these operations could be done in parallel on a multi-core system, which is the purpose behind functional languages. However, functional languages are missing the equivalent of Ruby or Python, that is, a language that optimizes for developer time.
+*Europa* is an attempt at an object-oriented, reflective, modern language. As computers get faster with more cores and memory, it is important that parallelization and concurrency be made as simple as possible. Additionally, most modern network applications spend the majority of their time waiting on and manipulating IO. A web framework gets an HTTP request, processes it, turns it into one or several database queries that run sequentially, builds a response document in memory, then sends it back out on the network. All of these operations could be done in parallel on a multi-core system, which is the purpose behind functional languages. However, functional languages are missing the equivalent of Ruby or Python, that is, a language that optimizes for developer time.
 
 ## Managing IO
 
 Since IO is so fundamental to the performance and operation of every network server, it is absolutely imperative that the language support it at a very low level, and make it transparent to the developer. Some features in functional languages make this easier.
+
+## Exemplar Sample
+
+    def sleep_and_print(time)
+      x = sleep(time)
+      print x
+    end
+
+    print_and_sleep(4)
+    print_and_sleep(2)
+
+### Notes
+
+Given:
+
+1. The #sleep method sleeps for the given number of seconds. However, since all methods are asynchronous, it might take a little longer, and so returns the actual time slept.
+2. Method calls always execute in order, so even though the first sleeps for longer, they output is printed in the correct order.
+3. The method calls happen in parallel, so the total run time is slightly more than 4 seconds.
+
+### Output
+
+    $ time europa sample.eur
+    4.0021
+    2.0003
+    europa sample.eur 0.00s user 0.00s system 0% cpu 4.083 total
 
 
 

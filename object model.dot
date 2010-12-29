@@ -1,0 +1,130 @@
+
+digraph object_model {
+
+  graph [
+    rankdir = "RL"
+  ];
+
+  node [
+    shape = "record"
+  ];
+
+  edge [
+  ];
+
+  empty [
+    label = "EmptyObject|\
+    __clone\l\
+    __send\l\
+    "
+  ];
+
+  object [
+    label = "Object|\
+    clone\l\
+    send\l\
+    object_id\l\
+    ==\l\
+    ===\l\
+    eql?\l\
+    equal?\l\
+    []\l\
+    []=\l\
+    "
+  ];
+  object -> empty;
+
+  number [
+    label = "Number|\
+    +\l\
+    -\l\
+    *\l\
+    /\l\
+    "
+  ];
+  number -> object;
+
+  integer [
+    label = "Integer|\
+    \l\
+    "
+  ];
+  integer -> number;
+
+  buffer [
+    label = "Buffer|\
+    each\l\
+    "
+  ];
+  buffer -> object;
+
+  string [
+    label = "String|\
+    \l\
+    "
+  ];
+  string -> buffer;
+
+  "label" [
+    label = "Label|\
+    \l\
+    "
+  ];
+  "label" -> object;
+
+  kernel [
+    label = "Kernel|\
+    print\l\
+    "
+  ];
+  kernel -> object;
+
+  array [
+    label = "Array|\
+    []\l\
+    []=\l\
+    each\l\
+    "
+  ];
+  array -> object;
+
+  boolean [
+    label = "Boolean|\
+    "
+  ];
+  boolean -> object;
+
+  "true" [
+    label = "true|\
+    "
+  ];
+  "true" -> boolean;
+
+  "false" [
+    label = "false|\
+    "
+  ];
+  "false" -> boolean;
+
+
+
+  nil [
+    label = "nil|\
+    nil?\l\
+    blank?\l\
+    "
+  ];
+  nil -> object;
+
+  undefined [
+    label = "undefined|\
+    blank?\l\
+    "
+  ];
+  undefined -> object;
+
+
+
+}
+
+
