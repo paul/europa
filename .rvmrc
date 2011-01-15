@@ -1,7 +1,7 @@
 
 if [[ -d "${rvm_path:-$HOME/.rvm}/environments" \
-  && -s "${rvm_path:-$HOME/.rvm}/environments/macruby-0.8" ]] ; then
-  \. "${rvm_path:-$HOME/.rvm}/environments/macruby-0.8"
+  && -s "${rvm_path:-$HOME/.rvm}/environments/rbx-head@europa" ]] ; then
+  \. "${rvm_path:-$HOME/.rvm}/environments/rbx-head@europa"
 else
-  rvm --create  "macruby-0.8"
+  rvm --create  "rbx-head@europa"
 fi
