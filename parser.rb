@@ -1,18 +1,59 @@
 
-require 'polyglot'
-require 'treetop'
+require 'parslet'
 
-Treetop.load "europa.tt"
+class EuropaParser < Parslet::Parser
 
-filename = ARGV.last
+  rule(:script)     { (comment).repeat }
 
-parser = EuropaParser.new
-result = parser.parse(File.open(filename).read)
+  rule(:comment)    { (space.maybe >> str('#') >> (eol.absnt? >> any).repeat >> eol).repeat(1) }
 
-if !result
-  puts parser.failure_reason
-else
-  puts "Success!"
-  p result
+  rule(:eol)        { match('[\r\n]').repeat(1) }
+  rule(:space)      { str(' ').repeat(1) }
+  rule(:space?)     { space.maybe }
+
+  root(:script)
+end
+
+if $0 == __FILE__
+  require 'minitest/autorun'
+
+  class ParserTest < MiniTest::Unit::TestCase
+
+    def setup
+      @parser = EuropaParser.new
+    end
+
+    def assert_parses(code)
+      begin
+        @parser.parse code
+      rescue Parslet::ParseFailed => err
+        raise MiniTest::Assertion, err.to_s + "\n" + @parser.root.error_tree.to_s
+      end
+    end
+
+    def test_comment
+      assert_parses <<-CODE
+# comment
+      CODE
+    end
+
+    def test_multiline_comment
+      assert_parses <<-CODE
+#######################
+# Fancy Comment Block #
+#######################
+      CODE
+    end
+
+    def test_indented_comment
+      assert_parses <<-CODE
+        # indent
+      CODE
+    end
+
+
+
+  end
+
 end
 

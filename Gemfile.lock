@@ -1,8 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    ffi (1.0.4)
+    blankslate (2.1.2.3)
+    ffi (1.0.5)
       rake (>= 0.8.7)
+    minitest (2.0.2)
+    parslet (1.0.0)
+      blankslate (~> 2.1.2.3)
     rake (0.8.7)
     ruby-llvm (2.7.0)
       ffi (>= 0.5.4)
@@ -11,4 +15,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  minitest
+  parslet
   ruby-llvm
