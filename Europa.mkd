@@ -15,8 +15,8 @@ Since IO is so fundamental to the performance and operation of every network ser
       print x
     end
 
-    print_and_sleep(4)
-    print_and_sleep(2)
+    sleep_and_print(4)
+    sleep_and_print(2)
 
 ### Notes
 
@@ -26,12 +26,12 @@ Given:
 2. Method calls always execute in order, so even though the first sleeps for longer, they output is printed in the correct order.
 3. The method calls happen in parallel, so the total run time is slightly more than 4 seconds.
 
-### Output
+### Expected Output
 
     $ time europa sample.eur
-    4.0021
-    2.0003
-    europa sample.eur 0.00s user 0.00s system 0% cpu 4.083 total
+    4.00xx
+    2.00xx
+    europa sample.eur 0.00s user 0.00s system 0% cpu 4.0xx total
 
 
 
